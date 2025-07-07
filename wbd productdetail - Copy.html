@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product Detail</title>
+
+    <style>
+        /*  Style the page background and base font */
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #f9f9f9;
+        }
+        
+        .product-container {
+            background: white;
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .product-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        p {
+            color: #555;
+            font-size: 16px;
+        }
+        
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d32f2f;
+            margin-top: 10px;
+        }
+        
+        .pic {
+            width: 300px;
+            max-height: 350px;
+            max-width: 100%;
+            margin: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--  Main product display container -->
+    <div class="product-container">
+        <h2 id="product-name">Loading...</h2>
+        <!-- Placeholder title -->
+
+        <img class="pic" id="product-image" src="" alt="Product Image">
+        <!-- Image will load here -->
+
+        <p id="product-description"></p>
+        <!-- Description will appear here -->
+
+        <p class="price"><strong>Price:</strong> <span id="product-price"></span></p>
+        <!-- Price -->
+    </div>
+
+    <script>
+        //  Define product data (can be replaced with external JSON later)
+        const products = {
+            1: {
+                name: "Red T-Shirt",
+                description: "Comfortable cotton shirt in vibrant red.",
+                price: "$15",
+                image: "tshirt.jpg"
+            },
+            2: {
+                name: "Blue Jeans",
+                description: "Slim-fit denim jeans, classic and stylish.",
+                price: "$40",
+                image: "jeans.jpg"
+            },
+            3: {
+                name: "Sneakers",
+                description: "Running shoes for everyday comfort.",
+                price: "$60",
+                image: "sneakers.jpg"
+            }
+        };
+
+        //  Get the product ID from the URL query string (e.g., ?id=2)
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id'); // get 'id' value from the URL
+
+        //  Find the product by ID
+        const product = products[id];
+
+        //  If product is found, insert content into the page
+        if (product) {
+            // Insert product name, description, price
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-description').textContent = product.description;
+            document.getElementById('product-price').textContent = product.price;
+
+            // Insert and show the product image
+            const image = document.getElementById('product-image');
+            image.src = product.image;
+            image.alt = product.name;
+            image.style.display = 'block'; // make the image visible
+        } else {
+            //  If no product found for the given ID, show error message
+            document.getElementById('product-name').textContent = "Product not found.";
+        }
+    </script>
+
+</body>
+
+</html>
